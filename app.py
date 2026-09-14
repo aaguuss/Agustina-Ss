@@ -19,29 +19,45 @@ st.set_page_config(
     layout="centered"
 )
 
-# Estilo personalizado Cyberpunk (Fondo oscuro, texto verde Neón)
+# Estilo personalizado Animal Print + Negro y Rojo
 st.markdown("""
     <style>
+    /* Fondo con patrón Animal Print de leopardo en tonos negro y rojo */
     .stApp {
-        background-color: #0d1117;
-        color: #00ff66;
+        background-color: #0d0000;
+        background-image: url('https://www.transparenttextures.com/patterns/leopard.png'); /* Textura de leopardo */
+        color: #ff2a2a; /* Texto rojo neón */
         font-family: 'Courier New', Courier, monospace;
     }
+    
+    /* Cajas principales para legibilidad sobre el fondo */
+    .stMarkdown, .stText {
+        background-color: rgba(10, 0, 0, 0.88);
+        padding: 10px;
+        border-radius: 8px;
+    }
+    
+    /* Botones negros con borde y texto rojo */
     .stButton>button {
-        background-color: #1f2937;
-        color: #00ff66;
-        border: 1px solid #00ff66;
+        background-color: #000000;
+        color: #ff2a2a;
+        border: 2px solid #ff2a2a;
         border-radius: 8px;
         font-weight: bold;
     }
+    
+    /* Efecto al pasar el mouse por los botones */
     .stButton>button:hover {
-        background-color: #00ff66;
-        color: #0d1117;
+        background-color: #ff2a2a;
+        color: #000000;
+        box-shadow: 0 0 12px #ff2a2a;
     }
+    
+    /* Entradas de texto */
     .stTextInput>div>div>input {
-        background-color: #161b22;
-        color: #00ff66;
-        border: 1px solid #30363d;
+        background-color: #050000;
+        color: #ff2a2a;
+        border: 1px solid #ff2a2a;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -60,7 +76,7 @@ if 'nivel' not in st.session_state:
 # 🖥️ ENCABEZADO Y BARRA DE PROGRESO
 # ==========================================
 st.title("🖤Desafio")
-st.caption("🔒 Acceso Restringido - Nivel de Seguridad HOT AF")
+st.caption("🐆Acceso Restringido - Nivel de Seguridad HOT AF")
 
 progreso = (st.session_state.nivel - 1) / 5.0
 st.progress(progreso)
@@ -97,17 +113,17 @@ elif st.session_state.nivel == 2:
     
     log_falso = """
     [SYS_BOOT]: Iniciando protocolo de diagnóstico...
-    [NET_TRACE]: Conexión establecida con Nodo #7.
-    [SECURITY_LOG]: Clave encriptada -> 'GATO'
-    [SYS_STATUS]: Esperando autorización de usuario...
+    [NET_TRACE]: BUSCANDO....
+    [SECURITY_LOG]: Clave encriptada -> 'EL MEJOR GATO'
+    [SYS_STATUS]: ÑAUUUU...
     """
     st.code(log_falso, language="syslog")
     
     input_n2 = st.text_input("Ingresa la clave identificada:", key="n2_input")
     
     if st.button("❤️ Validar Nivel 2"):
-        if input_n2.strip().upper() == "GATO":
-            st.success("✅ ¡CLAVE MAESTRA CONFIRMADA APROBADA POR EL TAYS!")
+        if input_n2.strip().upper() == "ZARZUR":
+            st.success("🐈 ¡CLAVE MAESTRA CONFIRMADA APROBADA POR EL TAYS!")
             st.session_state.nivel = 3
             st.rerun()
         else:
@@ -118,15 +134,15 @@ elif st.session_state.nivel == 2:
 # ==========================================
 elif st.session_state.nivel == 3:
     st.subheader("🛡️ Nivel 3: Protocolo Criptográfico AES")
-    st.info("Descifra el bloque cifrado con la clave combinada de los niveles anteriores.")
+    st.info("2cf15ead85.")
     
-    st.write("🔑 **Clave AES:** `GATO` + `5` (Tu clave es: `GATO5`)")
+    st.write("🔑 **Clave AES: chocolate fav")
     
     input_n3 = st.text_input("Ingresa la respuesta AES:", key="n3_input")
     
     if st.button("🔓 Validar Nivel 3"):
-        if input_n3.strip().lower() == "cyberamor":
-            st.success("✅ ¡BLOQUE AES DESENCRIPTADO CON ÉXITO!")
+        if input_n3.strip().lower() == "teamo":
+            st.success("BLOQUE AES DESENCRIPTADO CON ÉXITO! YOU ARE COOL")
             st.session_state.nivel = 4
             st.rerun()
         else:
@@ -136,7 +152,7 @@ elif st.session_state.nivel == 3:
 # ⚛️ NIVEL 4: PROTOCOLO CUÁNTICO BB84
 # ==========================================
 elif st.session_state.nivel == 4:
-    st.subheader("⚛️ Nivel 4: Distribución Cuántica (BB84)")
+    st.subheader("🐆 Nivel 4: Distribución Cuántica (BB84)")
     st.info("Compara las bases de medición para sintetizar los bits de la clave cuántica.")
     
     st.markdown("""
@@ -150,43 +166,46 @@ elif st.session_state.nivel == 4:
     
     input_n4 = st.text_input("Ingresa la cadena binaria resultante:", key="n4_input")
     
-    if st.button("🔓 Validar Nivel 4"):
+    if st.button("Gánale a un computador"):
         if input_n4.strip() == "110":
-            st.success("✅ ¡CANAL CUÁNTICO ESTABLECIDO!")
+            st.success(" ERES MEJOR QUE UN COMPUTADOR CUÁNTICO!")
             st.session_state.nivel = 5
             st.rerun()
         else:
-            st.error("❌ Los bits no coinciden con las bases filtradas.")
+            st.error("▄︻デ══━一 Los bits no coinciden con las bases filtradas.")
 
 # ==========================================
 # 🖼️ NIVEL 5: ESTEGANOGRAFÍA Y MÚSICA (FINAL)
 # ==========================================
+
+# ==========================================
+# 🏁 NIVEL 5: REVELACIÓN FINAL Y MÚSICA
+# ==========================================
 elif st.session_state.nivel == 5:
-    st.subheader("🏁 Nivel 5: Extracción Esteganográfica Final")
-    st.write("Sube la imagen `.png` para desencriptar el último mensaje y activar la banda sonora.")
+    st.subheader("🏁 Nivel 5: Desencriptación Final")
+    st.info("Ingresa la Clave y libera la transmisión de audio y el mensaje secreto.")
     
-    subir_foto = st.file_uploader("Cargar Foto Secreta (.png)", type=["png"])
-    input_clave_final = st.text_input("Clave Cuántica de Activación (Nivel 4):", value="110")
+    input_clave_final = st.text_input("Clave Cuántica de Activación:", placeholder="sex number...")
     
     if st.button("🎉 REVELAR REGALO Y FINAL"):
-        if subir_foto is not None and input_clave_final == "110":
+        if input_clave_final.strip() == "69":
             st.balloons()
-            st.success("💖 ¡MISIÓN COMPLETADA CON ÉXITO!")
+            st.success("💖 esooo")
+            
             st.markdown("### 💌 Mensaje Secreto:")
-            st.write("¡Hackeaste mi corazón! Tu regalo está esperándote en la mesa de noche. 🎁")
+            st.write("lo lograste baddie... elige tu premio")
             
             st.divider()
-            st.subheader("🎧 Transmisión de Audio Privada:")
+            st.subheader("🎧 Transmisión de Audio Secreta:")
             
-            # Link a YouTube
-            link_youtube = "https://www.youtube.com/watch?v=dQw4w9WgXcQ" # Pon tu canción aquí
+            link_youtube = "https://youtu.be/SA7AIQw-7Ms?si=eFJHaLEO36ktj6yp" # Tu enlace de YouTube
             
             if qrcode:
                 qr = qrcode.make(link_youtube)
                 buf = io.BytesIO()
                 qr.save(buf)
-                st.image(buf.getvalue(), caption="📲 Escanea con tu celular para escuchar nuestra canción", width=200)
+                st.image(buf.getvalue(), caption="📲 Escanea con tu celular para escuchar nuestra canción", width=220)
             
-            st.link_button("▶️ Abrir canción directamente en YouTube", link_youtube)
+            st.link_button("▶ Escuchar transmisión directa en YouTube", link_youtube)
         else:
-            st.error("⚠️ Sube el archivo de imagen correcto para finalizar.")
+            st.error("mala vola")
