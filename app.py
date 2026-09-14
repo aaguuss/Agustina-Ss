@@ -4,7 +4,7 @@ import io
 import base64
 from PIL import Image
 
-# Verificación e importación de QR
+# Intenta importar qrcode; si no está, lo avisa en la app
 try:
     import qrcode
 except ImportError:
@@ -14,12 +14,12 @@ except ImportError:
 # ⚙️ CONFIGURACIÓN DE PÁGINA Y ESTILO HACKER
 # ==========================================
 st.set_page_config(
-    page_title="CYBER-ESCAPE: Misión Secreta",
-    page_icon="🕵️‍♀️",
+    page_title="Agustina: Misión oculta",
+    page_icon="💋",
     layout="centered"
 )
 
-# Estilo Neón/Cyberpunk
+# Estilo personalizado Cyberpunk (Fondo oscuro, texto verde Neón)
 st.markdown("""
     <style>
     .stApp {
@@ -46,110 +46,109 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# Validación mediante SHA-256 (Anti-Trampa)
+# Helper para verificar hashes SHA-256 (Protección anti-trampa)
 def verificar_hash(texto, hash_esperado):
     return hashlib.sha256(texto.strip().lower().encode()).hexdigest() == hash_esperado
 
 # ==========================================
-# 🧠 ESTADO DEL JUEGO
+# 🧠 MEMORIA DEL JUEGO (ESTADO DE NIVELES)
 # ==========================================
 if 'nivel' not in st.session_state:
     st.session_state.nivel = 1
 
 # ==========================================
-# 🖥️ ENCABEZADO
+# 🖥️ ENCABEZADO Y BARRA DE PROGRESO
 # ==========================================
-st.title("💻 CYBER-ESCAPE ROOM")
-st.caption("🔒 Terminal de Operaciones Espaciales - Nivel de Seguridad Alfa")
+st.title("🖤Desafio")
+st.caption("🔒 Acceso Restringido - Nivel de Seguridad HOT AF")
 
 progreso = (st.session_state.nivel - 1) / 5.0
 st.progress(progreso)
-st.write(f"**Progreso:** Nivel {st.session_state.nivel} / 5")
+st.write(f"**Progreso de Misión:** Nivel {st.session_state.nivel} / 5")
 st.divider()
 
 # ==========================================
-# 🔒 NIVEL 1: CÉSAR
+# 🔒 NIVEL 1: CIFRADO CÉSAR
 # ==========================================
 if st.session_state.nivel == 1:
-    st.subheader("🏛️ Nivel 1: Cifrado César")
-    st.info("Interceptado canal primario. Aplica el desplazamiento necesario para descifrar la frase.")
+    st.subheader("🍒 Nivel 1: Cifrado César")
+    st.info("Agustina te ha dejado un mensaje interceptado. Aplica el desplazamiento para revelar la frase.")
     
-    st.code("MFRXF B RFG15 (Shift: 5)", language="text")
-    st.write("💡 *Pista: Desplaza cada letra 5 posiciones hacia atrás en el abecedario.*")
+    st.code("xdrpqfkx", language="text")
+    st.write("💡 *Pista: Mueve cada letra el numero más cool en posiciones hacia atrás en el abecedario.*")
     
     input_n1 = st.text_input("Ingresa la frase descifrada:", key="n1_input")
     
     if st.button("🔓 Validar Nivel 1"):
-        # Hash de "hola a todos" (Puedes cambiar la respuesta calculando tu propio hash)
-        if verificar_hash(input_n1, "a9987a020be8a9840ef403faed5578ee150d1704257850ed319fb4f4c8032e3a"): 
-            st.success("✅ ¡ACCESO NIVEL 1 CONCEDIDO!")
+        # Cambia aquí la respuesta si deseas (usa hash si no quieres texto plano)
+        if input_n1.strip().lower() == "agustina":  
+            st.success("HOTTT...ACCESO NIVEL 1 CONCEDIDO!")
             st.session_state.nivel = 2
             st.rerun()
         else:
-            st.error("❌ Frase incorrecta.")
+            st.error("❌ Código incorrecto.buu you whore")
 
 # ==========================================
-# 🔑 NIVEL 2: VIGENÈRE (Pista Visual)
+# 🔑 NIVEL 2: CIFRADO VIGENÈRE (Pista Visual)
 # ==========================================
 elif st.session_state.nivel == 2:
-    st.subheader("🔑 Nivel 2: Cifrado Vigenère")
-    st.info("Inspecciona los registros del sistema. La clave maestra fue grabada en los logs.")
+    st.subheader("🍒 Nivel 2: Cifrado Vigenère")
+    st.info("Inspecciona los registros del sistema para encontrar la Clave Maestra oculta.")
     
     log_falso = """
-    [SYS_BOOT]: Protocolo de diagnóstico activado...
-    [NET_TRACE]: Nodo #7 respondiendo correctamente.
-    [SECURITY_LOG]: Master Key temporal capturada -> 'GATO'
-    [SYS_STATUS]: Esperando ingreso de credenciales...
+    [SYS_BOOT]: Iniciando protocolo de diagnóstico...
+    [NET_TRACE]: Conexión establecida con Nodo #7.
+    [SECURITY_LOG]: Clave encriptada -> 'GATO'
+    [SYS_STATUS]: Esperando autorización de usuario...
     """
     st.code(log_falso, language="syslog")
     
-    input_n2 = st.text_input("Ingresa la clave hallada:", key="n2_input")
+    input_n2 = st.text_input("Ingresa la clave identificada:", key="n2_input")
     
-    if st.button("🔓 Validar Nivel 2"):
+    if st.button("❤️ Validar Nivel 2"):
         if input_n2.strip().upper() == "GATO":
-            st.success("✅ ¡CLAVE ACEPTADA!")
+            st.success("✅ ¡CLAVE MAESTRA CONFIRMADA APROBADA POR EL TAYS!")
             st.session_state.nivel = 3
             st.rerun()
         else:
-            st.error("❌ Clave no válida. Lee las líneas de [SECURITY_LOG].")
+            st.error("❌ Clave no válida. Lee con atención las líneas [SECURITY_LOG].")
 
 # ==========================================
 # 🛡️ NIVEL 3: CIFRADO AES
 # ==========================================
 elif st.session_state.nivel == 3:
-    st.subheader("🛡️ Nivel 3: Protocolo AES")
-    st.info("Sintetiza la clave AES combinando la respuesta del Nivel 2 + el número del Nivel 1.")
+    st.subheader("🛡️ Nivel 3: Protocolo Criptográfico AES")
+    st.info("Descifra el bloque cifrado con la clave combinada de los niveles anteriores.")
     
-    st.write("🔑 **Clave AES requerida:** `GATO` + `5` = `GATO5`")
+    st.write("🔑 **Clave AES:** `GATO` + `5` (Tu clave es: `GATO5`)")
     
-    input_n3 = st.text_input("Ingresa la solución del bloque AES:", key="n3_input")
+    input_n3 = st.text_input("Ingresa la respuesta AES:", key="n3_input")
     
     if st.button("🔓 Validar Nivel 3"):
-        # Hash de "cyberamor"
-        if verificar_hash(input_n3, "667a760de8f58b8f2d593fa8ea260a9f5d3ff216f4ad259b39dfed4142f9b2d3"):
-            st.success("✅ ¡DESENCRIPTACIÓN AES COMPLETADA!")
+        if input_n3.strip().lower() == "cyberamor":
+            st.success("✅ ¡BLOQUE AES DESENCRIPTADO CON ÉXITO!")
             st.session_state.nivel = 4
             st.rerun()
         else:
             st.error("❌ Clave incorrecta.")
 
 # ==========================================
-# ⚛️ NIVEL 4: BB84 Y CÓDIGO QR
+# ⚛️ NIVEL 4: PROTOCOLO CUÁNTICO BB84
 # ==========================================
 elif st.session_state.nivel == 4:
     st.subheader("⚛️ Nivel 4: Distribución Cuántica (BB84)")
-    st.info("Compara las bases de medición y extrae los bits donde ambas coincidan.")
+    st.info("Compara las bases de medición para sintetizar los bits de la clave cuántica.")
     
     st.markdown("""
-    | Fotón | Base Enviada | Base Medida | Bit Valido |
+    | Fotones | Bases Enviadas | Bases Medidas | Coinciden? |
     | :---: | :---: | :---: | :---: |
-    | 1 | + | + | **1** |
-    | 0 | x | + | *Descartado* |
-    | 1 | x | x | **1** |
-    | 0 | + | + | **0** |
+    | 1 | + | + | Sí (1) |
+    | 0 | x | + | No |
+    | 1 | x | x | Sí (1) |
+    | 0 | + | + | Sí (0) |
     """)
     
-    input_n4 = st.text_input("Ingresa la cadena binaria (3 bits):", key="n4_input")
+    input_n4 = st.text_input("Ingresa la cadena binaria resultante:", key="n4_input")
     
     if st.button("🔓 Validar Nivel 4"):
         if input_n4.strip() == "110":
@@ -157,36 +156,37 @@ elif st.session_state.nivel == 4:
             st.session_state.nivel = 5
             st.rerun()
         else:
-            st.error("❌ Secuencia binaria errónea.")
+            st.error("❌ Los bits no coinciden con las bases filtradas.")
 
 # ==========================================
-# 🖼️ NIVEL 5: ESTEGANOGRAFÍA Y MÚSICA
+# 🖼️ NIVEL 5: ESTEGANOGRAFÍA Y MÚSICA (FINAL)
 # ==========================================
 elif st.session_state.nivel == 5:
-    st.subheader("🏁 Nivel 5: Extracción Esteganográfica")
-    st.write("Carga la foto `.png` interceptada para desencriptar las instrucciones finales.")
+    st.subheader("🏁 Nivel 5: Extracción Esteganográfica Final")
+    st.write("Sube la imagen `.png` para desencriptar el último mensaje y activar la banda sonora.")
     
-    subir_foto = st.file_uploader("Subir Foto Secreta (.png)", type=["png"])
-    input_clave_final = st.text_input("Clave Cuántica (Nivel 4):", value="110")
+    subir_foto = st.file_uploader("Cargar Foto Secreta (.png)", type=["png"])
+    input_clave_final = st.text_input("Clave Cuántica de Activación (Nivel 4):", value="110")
     
-    if st.button("🎉 REVELAR FINAL"):
+    if st.button("🎉 REVELAR REGALO Y FINAL"):
         if subir_foto is not None and input_clave_final == "110":
             st.balloons()
-            st.success("💖 ¡SISTEMA TOTALMENTE HACKEADO!")
+            st.success("💖 ¡MISIÓN COMPLETADA CON ÉXITO!")
             st.markdown("### 💌 Mensaje Secreto:")
-            st.write("¡Completaste la misión! Tu premio real te espera guardado en el cajón de la mesa de noche. 🎁")
+            st.write("¡Hackeaste mi corazón! Tu regalo está esperándote en la mesa de noche. 🎁")
             
             st.divider()
-            st.subheader("🎧 Transmisión de Audio Secreta:")
+            st.subheader("🎧 Transmisión de Audio Privada:")
             
-            link_youtube = "https://www.youtube.com/watch?v=dQw4w9WgXcQ" # Tu enlace de YouTube
+            # Link a YouTube
+            link_youtube = "https://www.youtube.com/watch?v=dQw4w9WgXcQ" # Pon tu canción aquí
             
             if qrcode:
                 qr = qrcode.make(link_youtube)
                 buf = io.BytesIO()
                 qr.save(buf)
-                st.image(buf.getvalue(), caption="📲 Escanea para escuchar nuestra canción", width=220)
+                st.image(buf.getvalue(), caption="📲 Escanea con tu celular para escuchar nuestra canción", width=200)
             
-            st.link_button("▶️ Escuchar transmisión directa en YouTube", link_youtube)
+            st.link_button("▶️ Abrir canción directamente en YouTube", link_youtube)
         else:
-            st.error("⚠️ Sube la foto `.png` para procesar los píxeles.")
+            st.error("⚠️ Sube el archivo de imagen correcto para finalizar.")
